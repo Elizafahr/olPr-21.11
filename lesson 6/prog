@@ -1,0 +1,52 @@
+using System;
+class Program
+{
+    public static void Main(string[] args)
+    {
+
+      var fieldArray = new int[25];
+          var fireArray = new int[25];
+
+          var alive = 0;
+
+          // Подсказка для заполнения первого поля
+          Console.WriteLine("Введите 5 строк по 5 чисел для первого поля (разделяйте числа пробелами):");
+
+          // Заполнение первого поля числами 
+          for (int i = 0; i < 5; i++)
+          {
+              var line = Console.ReadLine().Split(" ");
+              for (int j = 0; j < 5; j++)
+              {
+                  fieldArray[i * 5 + j] = Int32.Parse(line[j]);
+              }
+          }
+
+          // Подсказка для заполнения второго поля
+          Console.WriteLine("Введите 5 строк по 5 чисел для второго поля (разделяйте числа пробелами):");
+
+          // Заполнение второго поля числами
+          for (int i = 0; i < 5; i++)
+          {
+              var line = Console.ReadLine().Split(" ");
+              for (int j = 0; j < 5; j++)
+              {
+                  fireArray[i * 5 + j] = Int32.Parse(line[j]);
+              }
+          }
+
+          // Сравнение элементов массивов
+          for (int i = 0; i < 25; i++)
+          {
+              if (fieldArray[i] - fireArray[i] > 0)
+              {
+                  alive++;
+              }
+          }
+
+          // Вывод результата
+          Console.WriteLine($"Количество элементов первого массива, которые больше соответствующих элементов второго массива: {alive}");
+      
+    }
+
+
