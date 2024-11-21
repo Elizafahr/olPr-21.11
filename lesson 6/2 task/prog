@@ -1,0 +1,49 @@
+using System;
+class Program
+{
+  public static void Main(string[] args)
+  {
+      Console.WriteLine("Введите букву, которую нужно исключить из слов:");
+      var letter = Console.ReadLine();
+
+      Console.WriteLine("Введите текст (слова должны быть разделены пробелами):");
+      var text = Console.ReadLine().Split(new char[] { ' ' });
+
+      var maxLen = 0;
+      var maxWord = "";
+
+      for (int i = 0; i < text.Length; i++)
+      {
+          var currently = 0;
+          var currentWord = text[i];
+          for (int j = 0; j < text[i].Length; j++)
+          {
+              if (text[i][j] == letter[0])
+              {
+                  currentWord = ""; // Сбрасываем текущее слово, если обнаружена буква
+                  currently = 0;    // Восстанавливаем текущую длину
+                  break;
+              }
+              else
+              {
+                  currently++; // Увеличиваем длину текущего слова
+              }
+          }
+
+          if (currently > maxLen)
+          {
+              maxWord = currentWord; // Обновляем максимальное слово
+              maxLen = currently;    // Обновляем максимальную длину
+          }
+      }
+
+      if (!string.IsNullOrEmpty(maxWord))
+      {
+          Console.WriteLine($"Слово максимальной длины, не содержащее букву '{letter[0]}': {maxWord}");
+      }
+      else
+      {
+          Console.WriteLine($"Все слова содержат букву '{letter[0]}'.");
+      }
+  }
+}

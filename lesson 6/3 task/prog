@@ -1,0 +1,38 @@
+using System;
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Введите координаты пешки (y x), где y - номер строки (1-8), x - номер столбца (1-8):");
+        var firstLine = Console.ReadLine();
+
+        Console.WriteLine("Введите координаты стенки (y x), где y - номер строки (1-8), x - номер столбца (1-8):");
+        var secondLine = Console.ReadLine();
+
+        var yP = Int32.Parse(firstLine.Split(" ")[0]);
+        var xP = Int32.Parse(firstLine.Split(" ")[1]);
+        var yW = Int32.Parse(secondLine.Split(" ")[0]);
+        var xW = Int32.Parse(secondLine.Split(" ")[1]);
+
+        // Если стенка на том же x, но выше пешки
+        if ((xP - xW) == 0 && yP > yW)
+        {
+            Console.WriteLine((8 - yP) + (yW - 1) + 7); //количество возможных ходов для пешки до конца доски с учетом стенки
+        }
+        // Если стенка на том же x, но ниже пешки
+        else if ((xP - xW) == 0 && yP < yW)
+        {
+            Console.WriteLine(yW - yP); //количество оставшихся ходов до стенки
+        }
+        // Если x пешки - x стенки четное
+        else if ((xP - xW) % 2 == 0)
+        {
+            Console.WriteLine((8 - yP) + (yW - 1) + (Math.Abs(xP - xW) - 1) * 7); // возможные ходы с учетом стенки
+        }
+        // Если x пешки - x стенки нечетное
+        else if (Math.Abs(xP - xW) % 2 == 1)
+        {
+            Console.WriteLine((8 - yP) + (8 - yW) + (Math.Abs(xP - xW) - 1) * 7);
+        }
+    }
+}
